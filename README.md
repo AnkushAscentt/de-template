@@ -107,6 +107,4 @@ pip install cookiecutter
 
 cd /path/to/your/project/directory
 
-cookiecutter https://github.com/Ascentt-Business-Systems/Data-Engineering-Template.git
-
-## HELLO HELLO HELLO
+cookiecutter https://github.com/shubhampanchal-dotcom/de-template-dummy.git
