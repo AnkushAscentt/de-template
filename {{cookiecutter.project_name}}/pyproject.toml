@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "tmna-cvo-cust-de-pipeline"
+version = "0.1.0"
+description = "CVO Customer Data Pipeline"
+authors = [
+  "Ajinkya Pardeshi <ajinkya.pardeshi@toyota.com>",
+  "Archita Kothari <archita.kothari@toyota.com>",
+  "Kino Choi <kino.choi@toyota.com>",
+  "Kiran Thirvakadu <kiran.thirvakadu@toyota.com>",
+  "Ruban Kumar <ruban.kumar@toyota.com>",
+]
+packages = [{include = "cvo_cust_data", from="src"}]
+exclude = ["src/tests"]
+readme = "README.md"
+
+
+[[tool.poetry.source]]
+name = "PyPI"
+priority = "primary"
+
+
+[tool.poetry.dependencies]

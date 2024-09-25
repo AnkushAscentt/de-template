@@ -18,16 +18,16 @@ from tqdm.auto import tqdm
 
 # Internal imports
 try:
-    from cvo_common_utilities.config.config_parser import ConfigParser
-    from cvo_common_utilities.utils._logging import setup_logging_config
-    from cvo_common_utilities.utils.aws import read_from_s3
+    from common_utils.config.config_parser import ConfigParser
+    from common_utils.utils._logging import setup_logging_config
+    from common_utils.utils.aws import read_from_s3
 except ModuleNotFoundError:
-    from src.cvo_common_utilities.config.config_parser import ConfigParser
-    from src.cvo_common_utilities.utils._logging import setup_logging_config
-    from src.cvo_common_utilities.utils.aws import read_from_s3
+    from src.common_utils.config.config_parser import ConfigParser
+    from src.common_utils.utils._logging import setup_logging_config
+    from src.common_utils.utils.aws import read_from_s3
 
 
-PARENT_MODULE = "cvo_cust_data"
+PARENT_MODULE = "de_module" ## Update the module name as per your requirements
 
 
 cfg = ConfigParser()
@@ -145,7 +145,7 @@ def run_modules(**kwargs) -> None:
 
     # Looping through through sorted modules
     for m in tqdm(pipeline.get_selected_modules()):
-        logger.info(f"Running module, cvo_cust_data.{m}")
+        logger.info(f"Running module, de_module.{m}")
         sub_module = importlib.import_module(f".{m}", PARENT_MODULE)
         # Add skip modules logic
         if hasattr(sub_module, "run") and callable(getattr(sub_module, "run")):

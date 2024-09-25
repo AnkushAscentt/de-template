@@ -13,9 +13,9 @@ import yaml
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 try:
-    from cvo_common_utilities.utils.aws import write_to_s3
+    from common_utils.utils.aws import write_to_s3
 except ModuleNotFoundError:
-    from src.cvo_common_utilities.utils.aws import write_to_s3
+    from src.common_utils.utils.aws import write_to_s3
 
 
 logger = logging.getLogger("config.config_parser")

@@ -15,7 +15,7 @@ def is_running_dbx() -> bool:
 
 def get_spark_session(
     master: str = "local[*]",
-    app_name: str = "cvo_cust_data",
+    app_name: str = "de-modules",
 ):
     """Generate spark session, using either existing one from DBX
     or create one locally
