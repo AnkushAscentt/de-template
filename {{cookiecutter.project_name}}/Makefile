@@ -3,7 +3,7 @@
 PYTHON_INTERPRETER=python3
 
 SOURCE_DIR=./src
-SOURCE_PATH=./src/cvo_cust_data
+SOURCE_PATH=./src/de_modules
 TESTS_DIR=./src/tests
 PYTEST_LOG_LEVEL=INFO
 PYTEST_COV_MIN=50
@@ -54,10 +54,8 @@ setup-local-dev:
 # TODO: Remove `--with test` flag once DevOps can call `dev_requirements.txt` for CI
 requirements:
 	poetry export -f requirements.txt --without-hashes \
-		--with test,dbx,cvo_utils \
 		--output requirements.txt
 	poetry export -f requirements.txt --without-hashes \
-		--with test,dev,cvo_utils \
 		--output dev_requirements.txt
 
 
@@ -96,7 +94,7 @@ serve-docs:
 # +++++++ +++++++ +++++++
 define run_tests
 	export PYTHONPATH=${SOURCE_DIR} && \
-	coverage run --source=${SOURCE_DIR} --omit="*/tests/*,*/cvo_common_utilities/*" \
+	coverage run --source=${SOURCE_DIR} --omit="*/tests/*,*/common_utils/*" \
 		-m pytest -vv --log-level=${PYTEST_LOG_LEVEL} $1 && \
 	make -s clean && \
 	if [ -n "$2" ]; then \

@@ -8,7 +8,6 @@ modulepath = os.path.join(ROOT_DIR, "src")
 if modulepath not in sys.path:
     sys.path.append(modulepath)
 
-from src.common_utils import __version__  # noqa: E402
 
 
 # Read the contents of your requirements.txt file
@@ -28,21 +27,12 @@ def parse_requirements(filename):
             requirements.append(line)
     return requirements
 
-# setup(
-#     name="tmna-{{ cookiecutter.project_slug }}",
-#     version="{{ cookiecutter.version }}",
-#     author="{{ cookiecutter.author_name }}",
-#     author_email="{{ cookiecutter.email }}",
-#     description="{{ cookiecutter.description }}",
-#     packages=find_packages(),
-#     install_requires=[],
-# )
 
 setup(
     name="tmna-{{ cookiecutter.project_slug }}",
     package_dir={"": "src"},
     packages=find_namespace_packages(where="src"),
-    version=__version__,
+    version="0.1.0",
     author="{{ cookiecutter.author_name }}",
     description="{{ cookiecutter.description }}",
     classifiers=[
