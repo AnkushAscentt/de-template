@@ -21,13 +21,11 @@ from pyspark.sql import DataFrame
 try:
     from common_utils.config.config_parser import ConfigParser
     from common_utils.utils.aws import S3Url, read_from_s3, write_to_s3
-    from common_utils.utils.ge import run_validation
     from src.common_utils.utils.spark import get_spark_session
 
 except ModuleNotFoundError:
     from src.common_utils.config.config_parser import ConfigParser
     from src.common_utils.utils.aws import S3Url, read_from_s3, write_to_s3
-    from src.common_utils.utils.ge import run_validation
     from src.common_utils.utils.spark import get_spark_session
 
 cfg = ConfigParser()
@@ -204,10 +202,6 @@ def load_data(catalog_entry: str, **kwargs) -> Union[DataFrame, pd.DataFrame, Li
 
         data = _load_spark(data_format, data_path, **kwargs)
 
-    # Run validation on data optionally for raw data
-    if "raw_" in catalog_entry:
-        _run_ge_validation(data, catalog_entry, kwarg_run_ge)
-
     return data
 
 
@@ -281,9 +275,6 @@ def save_data(
         kwargs.pop("tableau_secret_name", None)
         kwargs.pop("parent_project_name", None)
 
-    # Run Great Expectation validations on data if applicable
-    _run_ge_validation(data, catalog_entry, kwarg_run_ge)
-
     if data_format.lower() in ["csv", "excel"]:
         kwargs["header"] = True
 
@@ -327,34 +318,6 @@ def _create_output_folder(output_path: str) -> None:
     output_folder = os.path.dirname(output_path)
     if urlparse(output_path).scheme != "s3" and not os.path.exists(output_folder):
         os.makedirs(output_folder)
-
-
-def _run_ge_validation(
-    data: Union[pd.DataFrame, DataFrame, pl.DataFrame],
-    catalog_entry: str,
-    kwarg_run_ge: bool,
-) -> None:
-    """Trigger run_validation using Great Expectations for provided data
-
-    Args:
-        data: input data used for validation
-        catalog_entry: catalog entry name used for both catalog and expectation reference
-        kwarg_run_ge: boolean from kwargs to run GE or not
-    """
-
-    # Check if there's any explict validation off arguments
-    validation_mode = bool(cfg.globals.get("run_ge", True)) and kwarg_run_ge
-
-    if isinstance(data, pl.DataFrame):
-        data = data.to_pandas()
-
-    if validation_mode:
-        run_validation(catalog_entry, data)
-    else:
-        logger.info("Great Expectations turned off, skipping...")
-
-    return
-
 
 def _merge_kwargs(conf_kwargs: dict, func_kwargs: dict = None) -> dict:
     """Merge kwarg values from conf and function input, and overwrite conf values

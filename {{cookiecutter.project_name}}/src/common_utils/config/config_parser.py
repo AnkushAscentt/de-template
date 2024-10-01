@@ -63,9 +63,8 @@ class ConfigParser(metaclass=SingletonMeta):
         self.conf_validation = str(self.conf) + self.CONFIG_VALIDATION_FOLDER
 
         # Loading the environment from environment variables
-        self.env = os.environ.get("cvo_cust_data_ENV", None)
-        self.series = os.environ.get("cvo_cust_data_series", None)
-        skip_locals = os.environ.get("cvo_cust_data_skip_locals", "false")
+        self.env = os.environ.get("ENV", None)
+        skip_locals = os.environ.get("skip_locals", "false")
         skip_locals = skip_locals.lower() == "true"
 
         # Loading the configuration
@@ -81,16 +80,7 @@ class ConfigParser(metaclass=SingletonMeta):
             env: Name of environment
         """
         self.env = env
-        self.set_runtime_globals({"cvo_cust_data_ENV": env}, skip_globals=False)
-
-    def set_series(self, series: str) -> None:
-        """
-        Set the series environment variable to handle configuration loading
-        Args:
-            series: Series code or name (311D, 400D, Rav4, etc)
-        """
-        self.series = series
-        self.set_runtime_globals({"cvo_cust_data_series": series}, skip_globals=False)
+        self.set_runtime_globals({"ENV": env}, skip_globals=False)
 
     def set_runtime_globals(self, params: dict, skip_globals: bool = True):
         """
@@ -182,7 +172,7 @@ class ConfigParser(metaclass=SingletonMeta):
         # Raise error if the environment not found in priority list
         if self.env not in ENVIRONMENT_LIST:
             raise ValueError(
-                f"Invalid cvo_cust_data_ENV {self.env}. Please enter one of {ENVIRONMENT_LIST}"
+                f"Invalid ENV {self.env}. Please enter one of {ENVIRONMENT_LIST}"
             )
 
         # If environment is default then just return a
@@ -193,7 +183,6 @@ class ConfigParser(metaclass=SingletonMeta):
             return [
                 "default",
                 f"environment/{self.env}",
-                f"series/{self.series}",
                 "local",
             ]
 

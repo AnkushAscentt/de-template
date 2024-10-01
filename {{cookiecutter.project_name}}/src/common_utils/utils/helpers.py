@@ -112,11 +112,6 @@ def run_modules(**kwargs) -> None:
     if kwargs.get("env"):
         cfg.set_env(kwargs["env"])
 
-    if not kwargs.get("series"):
-        raise RuntimeError("No series set, please set a series using the --series flag")
-    else:
-        cfg.set_series(kwargs["series"])
-
     # Update the parameters with runtime overrides
     if kwargs.get("globals"):
         runtime_globals = load_runtime_parameters(kwargs["globals"])
@@ -154,15 +149,15 @@ def run_modules(**kwargs) -> None:
             logger.error(f"Layer: {sub_module} does not have a run method")
 
 
-class CVOArguments:
+class MAINArguments:
     """
     Setup the command line arguments for __main__ file.
     """
 
     def __init__(self) -> None:
         self.parser = argparse.ArgumentParser(
-            description="CVO Demand Forecaster to analytics pipeline",
-            usage="""python cvo <command> [<args>]""",
+            description="DE Pipeline", # Update the description
+            usage="""python <command> [<args>]""",
         )
 
         self.subparsers = self.parser.add_subparsers(
@@ -210,12 +205,6 @@ class CVOArguments:
             "-e",
             "--env",
             help="Environment to load",
-        )
-
-        self.parser.add_argument(
-            "-s",
-            "--series",
-            help="Series to run",
         )
 
         self.parser.add_argument(
