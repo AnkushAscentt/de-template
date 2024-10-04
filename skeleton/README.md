@@ -123,3 +123,29 @@
     - [tool.black]: Configuration for `black`, which is a python code formatter.
     - [tool.isort]: Configuration for `isort`, which is a utility tool that supports `import` sorting, section separation, etc.
     - [pytest]: Configuration for `pytest`
+
+
+skeleton
+    ├───.github
+    │   └───workflows 
+    ├───conf
+    │   ├───default
+    │   └───local
+    ├───data
+    ├───deploy
+    │   ├───dev
+    │   ├───prod
+    │   └───qa
+    ├───docs
+    ├───notebooks
+    ├───results
+    ├───scripts
+    └───src
+        ├───common_utils
+        │   ├───config
+        │   └───utils
+        ├───de_modules
+        └───tests
+            ├───large
+            ├───medium
+            └───small
