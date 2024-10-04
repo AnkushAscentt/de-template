@@ -126,26 +126,28 @@
 
 
 skeleton
-    ├───.github
-    │   └───workflows 
-    ├───conf
-    │   ├───default
-    │   └───local
-    ├───data
-    ├───deploy
-    │   ├───dev
-    │   ├───prod
-    │   └───qa
-    ├───docs
-    ├───notebooks
-    ├───results
-    ├───scripts
-    └───src
-        ├───common_utils
-        │   ├───config
-        │   └───utils
-        ├───de_modules
-        └───tests
-            ├───large
-            ├───medium
-            └───small
+    ├───.github               # Contains GitHub-related configuration files.
+    │   └───workflows         # Defines automated workflows for GitHub Actions.
+    ├───conf                  # Stores configuration files for different environments.
+    │   ├───default           # Default configuration settings.
+    │   └───local             # Local environment-specific configurations.
+    ├───data                  # Folder to store input datasets and data files.
+    ├───deploy                # Contains deployment scripts for various environments.
+    │   ├───dev               # Deployment files for the development environment.
+    │   ├───prod              # Deployment files for the production environment.
+    │   └───qa                # Deployment files for the quality assurance (QA) environment.
+    ├───docs                  # Documentation files related to the project.
+    ├───notebooks             # Jupyter notebooks for experiments and analyses.
+    ├───results               # Folder to store output results from scripts and experiments.
+    ├───scripts               # Collection of executable scripts for various tasks.
+    └───src                   # Source code of the project.
+        ├───common_utils      # Utility functions and configurations shared across modules.
+        │   ├───config        # Stores configuration-related utilities.
+        │   └───utils         # Miscellaneous utility functions.
+        ├───de_modules        # Data engineering modules and components.
+        │   ├───sample_layer  # Example layers or components for data processing.
+        │   └───schema        # Schema definitions for data models.
+        └───tests             # Contains test cases for the project.
+            ├───large         # Large-scale or end-to-end test cases.
+            ├───medium        # Medium-level integration tests.
+            └───small         # Small, unit-level test cases.
