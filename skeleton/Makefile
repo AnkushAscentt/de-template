@@ -50,15 +50,6 @@ setup-local-dev:
 	poetry config http-basic.jfrog-tmna ${JFROG_EMAIL} ${JFROG_API_KEY}
 	pre-commit install
 
-# WARNING: `make requirements` currently calls `--with test` for `requirements.txt`
-# TODO: Remove `--with test` flag once DevOps can call `dev_requirements.txt` for CI
-requirements:
-	poetry export -f requirements.txt --without-hashes \
-		--output requirements.txt
-	poetry export -f requirements.txt --without-hashes \
-		--output dev_requirements.txt
-
-
 # +++++++ +++++++ +++++++
 # Sphinx documentation
 # +++++++ +++++++ +++++++

@@ -1,0 +1,7 @@
+sample_module:
+  file_path: # Enter your data path
+  file_format: # Enter your file format (Ex. csv, parquet, delta etc)
+ 
+input_sample:
+  file_path: # Enter your data path
+  file_format: # Enter your file format (Ex. csv, parquet, delta etc)
