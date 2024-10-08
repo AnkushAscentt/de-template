@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: de-template
-  title: DataEngineering Template
+  title: Data Engineering Template
   description: Template to create repo for Data Engineering
 spec:
   owner: user:kandarp.sharma
@@ -30,7 +30,6 @@ spec:
         title: Email
         type: string
         description: Email address of the author
-        format: email
         ui:autofocus: true
         ui:options:
           rows: 5
@@ -86,7 +85,8 @@ spec:
           pod_name: ${{ parameters.pod_name }}
           description: ${{ parameters.description }}
           destination: ${{ parameters.repoUrl | parseRepoUrl }}
-          author: ${{ parameters.author }} 
+          author: ${{ parameters.author }}
+          email: ${{ parameters.email }} 
     # This step publishes the contents of the working directory to GitHub.
     - id: publish
       name: Publish
