@@ -43,7 +43,7 @@ spec:
       team_name:
         title: Team Name
         type: string
-        description: Team Name, Note*: Team Name should be a single word with no spaces.
+        description: Provide Team Name, Team Name should be a single word with no spaces.
         ui:autofocus: true
         pattern: "^[^\\s]+$"
         errorMessage: "Team Name should be a single word with no spaces."
